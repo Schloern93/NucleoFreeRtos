@@ -22,6 +22,8 @@ rem In den Build-Ordner wechseln
 cd "%BUILD_DIR%"
 
 rem Build starten
+ninja VERBOSE=1
+
 echo Starte den Build...
 cmake -G Ninja ..
 

@@ -23,7 +23,7 @@ set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(STM32_CHIP STM32G491RE)
 
 # Compiler-Flags (angepasst für STM32)
-set(CMAKE_C_FLAGS "-mcpu=cortex-m4 -mthumb -Wall -O2 -ffunction-sections -fdata-sections -g")
+set(CMAKE_C_FLAGS "-mcpu=cortex-m4 -mthumb -Wall -O0 -ffunction-sections -fdata-sections -g")
 
 
 #set(CMAKE_EXE_LINKER_FLAGS "-Wl,--gc-sections -T${CMAKE_SOURCE_DIR}/linker/STM32G491RETX_FLASH.ld")
@@ -31,16 +31,15 @@ set(CMAKE_C_FLAGS "-mcpu=cortex-m4 -mthumb -Wall -O2 -ffunction-sections -fdata-
 
 # Includepfade für HAL und CMSIS
 include_directories(
-    libs/stm32g4xx-hal-driver/Inc
-    libs/CMSIS/Device/ST/STM32G4xx/Include
-    libs/CMSIS/Core/Include
+    ${CMAKE_SOURCE_DIR}/config
+    ${CMAKE_SOURCE_DIR}/libs/stm32g4xx-hal-driver/Inc
+    ${CMAKE_SOURCE_DIR}/libs/CMSIS/Device/ST/STM32G4xx/Include
+    ${CMAKE_SOURCE_DIR}/libs/CMSIS/Core/Include
 )
 
 # Hauptquelle hinzufügen
 add_executable(${PROJECT_NAME} 
-    linker/startup_stm32g491xx.s      
-    linker/syscalls.c
-    linker/sysmem.c
+    linker/startup_stm32g491xx.s
     linker/system_stm32g4xx.c     
     src/main.cpp
 )

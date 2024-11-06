@@ -31,5 +31,5 @@ rem Build starten
 echo Starte den Build mit Ninja...
 ninja
 
-echo Build abgeschlossen.
+
 endlocal

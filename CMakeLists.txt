@@ -31,7 +31,7 @@ set(CMAKE_C_FLAGS "-mcpu=cortex-m4 -mthumb -Wall -O0 -ffunction-sections -fdata-
 
 # Includepfade für HAL und CMSIS
 include_directories(
-    ${CMAKE_SOURCE_DIR}/config
+    #${CMAKE_SOURCE_DIR}/config
     ${CMAKE_SOURCE_DIR}/libs/stm32g4xx-hal-driver/Inc
     ${CMAKE_SOURCE_DIR}/libs/CMSIS/Device/ST/STM32G4xx/Include
     ${CMAKE_SOURCE_DIR}/libs/CMSIS/Core/Include
@@ -40,7 +40,10 @@ include_directories(
 # Hauptquelle hinzufügen
 add_executable(${PROJECT_NAME} 
     linker/startup_stm32g491xx.s
-    linker/system_stm32g4xx.c     
+    linker/system_stm32g4xx.c
+    linker/syscalls.c
+    libs/stm32g4xx-hal-driver/Src/stm32g4xx_hal.c
+    libs/stm32g4xx-hal-driver/Src/stm32g4xx_hal_cortex.c
     src/main.cpp
 )
 

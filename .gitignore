@@ -1,0 +1,4 @@
+# Ignoriere den venv-Ordner
+venv/
+CMakeBuild/
+.vscode/

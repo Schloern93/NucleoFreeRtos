@@ -4,3 +4,10 @@ Starten des DEbuggens von der Commandozeile
 - arm-none-eabi-gdb CmakeBuild/BlinkExample.elf
 - target remote localhost:3333
 
+Debug befehle
+- monitor halt
+- monitor reset
+-  info register
+
+
+disassemble /m Reset_Handler

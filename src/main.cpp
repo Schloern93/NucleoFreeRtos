@@ -1,8 +1,31 @@
-#include "stm32g4xx_hal.h"
+
+#include "stm32g4xx_hal.h" 
 #include <cstdio>
 
 
+// HardFault Handler
+extern "C"  void HardFault_Handler(void)
+{
+    // Stack-Frames der betroffenen Register auslesen
+    uint32_t* stacked_r0  = (uint32_t*) 0x2001BFC8;  // Beispieladresse für den Stack
+    uint32_t* stacked_r1  = stacked_r0 + 1;
+    uint32_t* stacked_r2  = stacked_r0 + 2;
+    uint32_t* stacked_r3  = stacked_r0 + 3;
+    uint32_t* stacked_r12 = stacked_r0 + 4;
+    uint32_t* stacked_lr  = stacked_r0 + 5;
+    uint32_t* stacked_pc  = stacked_r0 + 6;
+    uint32_t* stacked_xpsr = stacked_r0 + 7;
 
+    // Ausgabe der Registerwerte für Debugging (z.B. auf UART)
+    printf("HardFault detected!\n");
+    printf("R0: %lx, R1: %lx, R2: %lx, R3: %lx\n", *stacked_r0, *stacked_r1, *stacked_r2, *stacked_r3);
+    printf("R12: %lx, LR: %lx, PC: %lx, xPSR: %lx\n", *stacked_r12, *stacked_lr, *stacked_pc, *stacked_xpsr);
+
+    // Optional: Fehlerbehandlung oder Reset durchführen
+    while(1) {
+        // Im Fehlerfall in einer Endlosschleife bleiben
+    }
+}
 
 // Funktion zur Initialisierung der GPIO
 void GPIO_Init()
@@ -21,7 +44,7 @@ int main(void)
 {
     //Reset of all peripherals, Initializes the Flash interface and the Systick.
     HAL_Init();
-    __HAL_RCC_WWDG_CLK_DISABLE();
+    //__HAL_RCC_WWDG_CLK_DISABLE();
     GPIO_Init();
    
 
